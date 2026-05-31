@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Details - Ambuja Foundation</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+        linear-gradient(rgba(7,24,58,0.72), rgba(7,24,58,0.72)),
+        url("ACF.jpg") center/cover fixed;
+    color:#1b1b1b;
+    overflow-x:hidden;
+}
+
+.page-shell{
+    width:94%;
+    max-width:1200px;
+    margin:auto;
+    padding:28px 0 42px;
+}
+
+.top-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:28px;
+}
+
+.brand{
+    color:white;
+}
+
+.brand h1{
+    font-size:32px;
+    line-height:1.2;
+    margin-bottom:5px;
+    overflow-wrap:anywhere;
+}
+
+.brand p{
+    color:#f6df8c;
+    font-size:16px;
+}
+
+.nav-actions{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    display:inline-block;
+    background:#f4c542;
+    color:#111;
+    text-decoration:none;
+    padding:12px 22px;
+    border-radius:6px;
+    font-weight:bold;
+    border:none;
+    cursor:pointer;
+    box-shadow:0 8px 18px rgba(0,0,0,0.24);
+    text-align:center;
+    overflow-wrap:anywhere;
+}
+
+.btn:hover{
+    background:white;
+    transform:translateY(-3px);
+    transition:0.3s;
+}
+
+.btn.secondary{
+    background:white;
+    color:#08007e;
+}
+
+.btn.secondary:hover{
+    background:#f4c542;
+    color:#111;
+}
+
+.hero-panel{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:22px;
+    align-items:stretch;
+    margin-bottom:22px;
+}
+
+.hero-content,
+.course-details{
+    background:rgba(255,255,255,0.94);
+    border:1px solid rgba(255,255,255,0.62);
+    border-radius:14px;
+    box-shadow:0 16px 40px rgba(0,0,0,0.28);
+}
+
+.hero-content{
+    padding:30px;
+}
+
+.hero-content h2{
+    color:#08007e;
+    font-size:38px;
+    line-height:1.15;
+    margin-bottom:12px;
+}
+
+.hero-content p{
+    color:#344056;
+    font-size:18px;
+    line-height:1.6;
+    margin-bottom:20px;
+}
+
+.course-image{
+    position:relative;
+    min-height:310px;
+    overflow:hidden;
+    border-radius:14px;
+    box-shadow:0 16px 40px rgba(0,0,0,0.28);
+}
+
+.course-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.course-badge{
+    position:absolute;
+    left:18px;
+    bottom:18px;
+    background:#f4c542;
+    color:#111;
+    padding:10px 16px;
+    border-radius:6px;
+    font-weight:bold;
+    box-shadow:0 8px 16px rgba(0,0,0,0.25);
+}
+
+.course-tabs{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin-bottom:22px;
+}
+
+.course-tab{
+    background:rgba(255,255,255,0.9);
+    border:2px solid transparent;
+    border-radius:10px;
+    padding:14px 10px;
+    color:#0b2343;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 8px 18px rgba(0,0,0,0.18);
+    overflow-wrap:anywhere;
+}
+
+.course-tab:hover,
+.course-tab.active{
+    border-color:#f4c542;
+    background:#08007e;
+    color:white;
+    transform:translateY(-4px);
+    transition:0.25s;
+}
+
+.course-details{
+    padding:30px;
+}
+
+.course-form-wrap > h2{
+    color:#08007e;
+    text-align:center;
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+.course-form-wrap > p{
+    text-align:center;
+    color:#4a4a4a;
+    font-size:18px;
+    margin-bottom:25px;
+}
+
+.course-form{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.course-field{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.course-field label{
+    color:#0b2343;
+    font-weight:bold;
+}
+
+.course-field input,
+.course-field select,
+.course-field textarea{
+    width:100%;
+    padding:13px 14px;
+    border:1px solid #aeb6c4;
+    border-radius:6px;
+    font-size:16px;
+    outline:none;
+    background:white;
+}
+
+.course-field input:focus,
+.course-field select:focus,
+.course-field textarea:focus{
+    border-color:#f4c542;
+    box-shadow:0 0 0 3px rgba(244,197,66,0.28);
+}
+
+.course-field textarea{
+    min-height:115px;
+    resize:vertical;
+}
+
+.course-info-grid{
+    grid-column:1 / -1;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.course-info-box{
+    background:#eef4ff;
+    border-left:5px solid #08007e;
+    border-radius:8px;
+    padding:18px;
+    min-height:150px;
+}
+
+.course-info-box h3{
+    color:#08007e;
+    margin-bottom:10px;
+    font-size:21px;
+}
+
+.course-info-box p{
+    color:#222;
+    font-size:16px;
+    line-height:1.6;
+}
+
+.course-message-field{
+    grid-column:1 / -1;
+}
+
+.form-actions{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+@media (max-width:980px){
+    .hero-panel,
+    .course-form,
+    .course-info-grid{
+        grid-template-columns:1fr;
+    }
+
+    .course-tabs{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media (max-width:640px){
+    body{
+        background-attachment:scroll;
+    }
+
+    .page-shell{
+        width:92%;
+        padding-top:18px;
+    }
+
+    .top-bar{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .nav-actions,
+    .nav-actions .btn,
+    .form-actions,
+    .form-actions .btn{
+        width:100%;
+        text-align:center;
+    }
+
+    .brand h1{
+        font-size:24px;
+    }
+
+    .hero-content,
+    .course-details{
+        padding:20px;
+    }
+
+    .hero-content h2,
+    .course-form-wrap > h2{
+        font-size:25px;
+    }
+
+    .course-tabs{
+        grid-template-columns:1fr;
+    }
+
+    .course-image{
+        min-height:220px;
+    }
+}
+</style>
+</head>
+<body>
+<main class="page-shell">
+    <header class="top-bar">
+        <div class="brand">
+            <h1>Ambuja Foundation Pvt. ITI Darlaghat</h1>
+            <p>Course details, benefits, and future career guidance</p>
+        </div>
+
+        <div class="nav-actions">
+            <a class="btn secondary" href="assignment.html">Back to Home</a>
+            <a class="btn" href="admissionform.html">Apply Now</a>
+        </div>
+    </header>
+
+    <section class="hero-panel">
+        <div class="hero-content">
+            <h2 id="hero-title">Explore Our Courses</h2>
+            <p id="hero-text">Select a course below to view training benefits, course duration, and future career opportunities.</p>
+            <a class="btn" href="#course-details-form">Ask About This Course</a>
+        </div>
+
+        <div class="course-image">
+            <img id="course-image" src="Electrician.jpg" alt="Selected course">
+            <span class="course-badge" id="course-duration">Duration: 24 Months</span>
+        </div>
+    </section>
+
+    <div class="course-tabs" aria-label="Course options">
+        <button class="course-tab" type="button" data-course="Electrician">Electrician</button>
+        <button class="course-tab" type="button" data-course="COPA">COPA</button>
+        <button class="course-tab" type="button" data-course="Mechanic Motor Vehicle">MMV</button>
+        <button class="course-tab" type="button" data-course="Electronics Mechanic">Electronics</button>
+        <button class="course-tab" type="button" data-course="Accounts Executive Tally">Tally</button>
+        <button class="course-tab" type="button" data-course="General Duty Assistant">GDA</button>
+        <button class="course-tab" type="button" data-course="Sewing Machine Operator">SMO</button>
+        <button class="course-tab" type="button" data-course="Soft Skills">Soft Skills</button>
+    </div>
+
+    <section class="course-details" id="course-details-form">
+        <div class="course-form-wrap">
+            <h2>Course Details Enquiry</h2>
+            <p>Select a course to see its benefits and related future career path.</p>
+
+            <form class="course-form">
+                <div class="course-field">
+                    <label for="details-course">Course Name</label>
+                    <select id="details-course" name="course">
+                        <option value="Electrician">Electrician</option>
+                        <option value="COPA">Computer Operator & Programming Assistant</option>
+                        <option value="Mechanic Motor Vehicle">Mechanic Motor Vehicle</option>
+                        <option value="Electronics Mechanic">Electronics Mechanic</option>
+                        <option value="Accounts Executive Tally">Accounts Executive Tally</option>
+                        <option value="General Duty Assistant">General Duty Assistant</option>
+                        <option value="Sewing Machine Operator">Sewing Machine Operator</option>
+                        <option value="Soft Skills">Soft Skills</option>
+                    </select>
+                </div>
+
+                <div class="course-field">
+                    <label for="student-phone">Mobile Number</label>
+                    <input id="student-phone" name="student-phone" type="tel" placeholder="Enter mobile number">
+                </div>
+
+                <div class="course-info-grid">
+                    <div class="course-info-box">
+                        <h3>Course Benefits</h3>
+                        <p id="course-benefits"></p>
+                    </div>
+
+                    <div class="course-info-box">
+                        <h3>Future Career</h3>
+                        <p id="course-career"></p>
+                    </div>
+
+                    <div class="course-info-box">
+                        <h3>Best For</h3>
+                        <p id="course-best-for"></p>
+                    </div>
+                </div>
+
+                <div class="course-field">
+                    <label for="student-name">Student Name</label>
+                    <input id="student-name" name="student-name" type="text" placeholder="Enter your name">
+                </div>
+
+                <div class="course-field">
+                    <label for="student-email">Email ID</label>
+                    <input id="student-email" name="student-email" type="email" placeholder="Enter email address">
+                </div>
+
+                <div class="course-field course-message-field">
+                    <label for="student-message">Question About This Course</label>
+                    <textarea id="student-message" name="student-message" placeholder="Ask about fees, eligibility, admission, or career scope"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <a class="btn" href="admissionform.html">Apply Now</a>
+                    <button class="btn secondary" type="reset">Clear Form</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+
+<script>
+const courseDetails = {
+    "Electrician": {
+        title: "Electrician",
+        duration: "Duration: 24 Months",
+        image: "Electrician.jpg",
+        benefits: "Learn wiring, electrical maintenance, safety practices, motors, panels, and practical installation work.",
+        career: "Future options include electrician, maintenance technician, electrical supervisor, contractor, or self-employment.",
+        bestFor: "Students interested in electrical systems, practical repair work, tools, and site maintenance."
+    },
+    "COPA": {
+        title: "Computer Operator & Programming Assistant",
+        duration: "Duration: 12 Months",
+        image: "COPA.jpg",
+        benefits: "Build skills in computer operations, office applications, internet use, basic programming, and data handling.",
+        career: "Future options include computer operator, data entry operator, office assistant, IT support assistant, or further IT training.",
+        bestFor: "Students who enjoy computers, office work, typing, software tools, and basic coding."
+    },
+    "Mechanic Motor Vehicle": {
+        title: "Mechanic Motor Vehicle",
+        duration: "Duration: 24 Months",
+        image: "MMV.jpeg",
+        benefits: "Learn vehicle systems, engine repair, servicing, diagnostics, tools, and workshop safety.",
+        career: "Future options include automobile technician, service advisor, workshop mechanic, vehicle inspector, or garage owner.",
+        bestFor: "Students interested in vehicles, engines, workshops, repair tools, and automobile servicing."
+    },
+    "Electronics Mechanic": {
+        title: "Electronics Mechanic",
+        duration: "Duration: 24 Months",
+        image: "Electronics.jpeg",
+        benefits: "Learn electronic circuits, testing tools, repair work, soldering, appliances, and industrial electronic systems.",
+        career: "Future options include electronics technician, service engineer assistant, maintenance technician, or repair business owner.",
+        bestFor: "Students who like devices, circuits, testing instruments, repair work, and technical troubleshooting."
+    },
+    "Accounts Executive Tally": {
+        title: "Accounts Executive Tally",
+        duration: "4 Months",
+        image: "Tally.jpeg",
+        benefits: "Learn accounting basics, Tally, GST entries, billing, inventory, and financial record management.",
+        career: "Future options include accounts assistant, billing executive, Tally operator, cashier, or junior accountant.",
+        bestFor: "Students interested in accounts, business records, billing, GST, and office finance work."
+    },
+    "General Duty Assistant": {
+        title: "General Duty Assistant",
+        duration: "4 Months",
+        image: "GDA.jpeg",
+        benefits: "Learn patient care, hygiene, basic hospital support, communication, and healthcare workplace discipline.",
+        career: "Future options include general duty assistant, nursing aide, hospital attendant, or home healthcare assistant.",
+        bestFor: "Students who want to work in healthcare support and patient-care environments."
+    },
+    "Sewing Machine Operator": {
+        title: "Sewing Machine Operator",
+        duration: "4 Months",
+        image: "SMO.jpeg",
+        benefits: "Learn garment stitching, machine handling, measurements, finishing, quality checking, and production skills.",
+        career: "Future options include sewing machine operator, tailor, boutique assistant, production helper, or self-employment.",
+        bestFor: "Students interested in garments, stitching, tailoring, boutique work, and self-employment."
+    },
+    "Soft Skills": {
+        title: "Soft Skills",
+        image: "SoftSkill.jpeg",
+        benefits: "Improve communication, confidence, interview preparation, workplace behavior, teamwork, and professional presentation.",
+        career: "These skills support careers in every field and improve chances in interviews, customer service, office roles, and entrepreneurship.",
+        bestFor: "Students preparing for interviews, first jobs, customer-facing work, or professional growth."
+    }
+};
+
+const courseSelect = document.getElementById("details-course");
+const benefitsText = document.getElementById("course-benefits");
+const careerText = document.getElementById("course-career");
+const bestForText = document.getElementById("course-best-for");
+const heroTitle = document.getElementById("hero-title");
+const heroText = document.getElementById("hero-text");
+const courseImage = document.getElementById("course-image");
+const courseDuration = document.getElementById("course-duration");
+const tabs = document.querySelectorAll(".course-tab");
+const selectedCourse = new URLSearchParams(window.location.search).get("course");
+
+function updateCourseDetails(courseName){
+    const details = courseDetails[courseName] || courseDetails.Electrician;
+
+    courseSelect.value = courseDetails[courseName] ? courseName : "Electrician";
+    benefitsText.textContent = details.benefits;
+    careerText.textContent = details.career;
+    bestForText.textContent = details.bestFor;
+    heroTitle.textContent = details.title;
+    heroText.textContent = details.benefits;
+    courseImage.src = details.image;
+    courseImage.alt = details.title;
+    courseDuration.textContent = details.duration;
+
+    tabs.forEach(function(tab){
+        tab.classList.toggle("active", tab.dataset.course === courseSelect.value);
+    });
+}
+
+courseSelect.addEventListener("change", function(){
+    updateCourseDetails(courseSelect.value);
+});
+
+tabs.forEach(function(tab){
+    tab.addEventListener("click", function(){
+        updateCourseDetails(tab.dataset.course);
+        document.getElementById("course-details-form").scrollIntoView({behavior:"smooth"});
+    });
+});
+
+updateCourseDetails(selectedCourse || courseSelect.value);
+</script>
+</body>
+</html>
